@@ -1,1 +1,21 @@
-Hello {{ name }}!
+<html>
+  <head>
+    <title>Bozhidar Rusev Task</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          {{#each rows}}
+            <td>{{symbol}}</td>
+            {{#gt percentageChanges 0}}
+              <td style="color:green">{{percentageChanges}}%</td>
+            {{else}}
+              <td style="color:red">{{percentageChanges}}%</td>
+            {{/gt}}
+          {{/each}}
+        </tr>
+      </thead>
+    </table>
+  </body>
+</html>
