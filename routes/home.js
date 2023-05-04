@@ -1,18 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const constants = require("../src/constants");
+const fetchSymbols = require("../src/util/util");
 
 router.get("/", async function (req, res) {
   try {
-    const responses = await Promise.all(
-      constants.Symbols.map((symbol) =>
-        fetch(`${constants.URL}?symbols=${symbol}`).then((responses) =>
-          responses.json()
-        )
-      )
-    );
-
-    const percentageChanges = responses.map((response) => {
+    const response = await fetchSymbols();
+    const data = response.map((response) => {
       return {
         symbol: response.data.items[0].basic.symbol,
         percentageValue:
@@ -23,18 +16,19 @@ router.get("/", async function (req, res) {
       };
     });
 
-    const templateData = {
-      rows: percentageChanges.map((percentage) => ({
-        symbol: percentage.symbol,
-        percentageChanges: percentage.percentageValue,
+    const templateView = {
+      rows: data.map((data) => ({
+        symbol: data.symbol,
+        percentageChanges: data.percentageValue,
       })),
     };
 
-    res.render("home", templateData);
+    res.render("home", templateView);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 module.exports = router;
