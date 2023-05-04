@@ -10,6 +10,13 @@ const port = process.env.PORT || 3000;
 app.engine("handlebars", expressHandlebars());
 app.set("view engine", "handlebars");
 
+hdb.registerHelper("gt", function (a, b, options) {
+  if (a > b) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 app.use("/static", express.static(path.join(__dirname, "static")));
 
 app.use("/", homeRoute);
