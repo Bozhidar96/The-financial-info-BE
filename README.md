@@ -15,7 +15,7 @@ We're not expecting you to complete this exercise, do only as much as you can wi
 3. Start the app with `npm start`
 4. Run the tests with `npm test`
 2. Add your library to `lib/fetch.js`
-5. To get developing, have a look in `app.js`
+5. To get developing, have a look in `app.ts`
 
 ## Using our Securities Quotes API
 

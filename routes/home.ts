@@ -1,8 +1,18 @@
-const express = require("express");
-const router = express.Router();
-const fetchSymbols = require("../src/util/util");
+import express, { Request, Response, Router } from "express";
+import { fetchSymbols } from "../src/util/util";
 
-router.get("/", async function (req, res) {
+interface RowData {
+  symbol: string;
+  percentageChanges: number;
+}
+
+interface TemplateView {
+  rows: RowData[];
+}
+
+const router: Router = express.Router();
+
+router.get("/", async function (req: Request, res: Response) {
   try {
     const response = await fetchSymbols();
     const data = response.map((response) => {
@@ -16,7 +26,7 @@ router.get("/", async function (req, res) {
       };
     });
 
-    const templateView = {
+    const templateView: TemplateView = {
       rows: data.map((data) => ({
         symbol: data.symbol,
         percentageChanges: data.percentageValue,
@@ -24,11 +34,10 @@ router.get("/", async function (req, res) {
     };
 
     res.render("home", templateView);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-
-module.exports = router;
+export default router;
