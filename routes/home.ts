@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { fetchSymbols } from "../src/util/util";
+import { fetchSymbols } from "../src/util";
 import { TemplateView } from "../src/interfaces";
 
 const router: Router = express.Router();
