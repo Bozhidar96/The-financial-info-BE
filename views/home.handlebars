@@ -1,1 +1,29 @@
-Hello {{ name }}!
+<html>
+  <head>
+    <title>Bozhidar Rusev Task</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="grid-container">
+        <div class="markets-data">
+          <ul class="markets-data-items">
+            {{#each rows}}
+              <li class="item-symbol-name">
+                <span>{{symbol}}</span>
+                {{#gt percentageChanges 0}}
+                  <span
+                    class="percentage-change-green"
+                  >+{{percentageChanges}}%</span>
+                {{else}}
+                  <span
+                    class="percentage-change-red"
+                  >{{percentageChanges}}%</span>
+                {{/gt}}
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
