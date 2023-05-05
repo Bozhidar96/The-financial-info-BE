@@ -95,3 +95,6 @@ typings/
 
 # TernJS port file
 .tern-port
+
+#ignore JS build files
+*.js
