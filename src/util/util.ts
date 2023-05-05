@@ -1,17 +1,5 @@
 import { Symbols, URL } from "../constants";
-
-interface ResponseData {
-  data: {
-    items: {
-      basic: {
-        symbol: string;
-      };
-      quote: {
-        change1DayPercent: number;
-      };
-    }[];
-  };
-}
+import { ResponseData } from "../interfaces";
 
 const fetchSymbols = (): Promise<ResponseData[]> => {
   return Promise.all(

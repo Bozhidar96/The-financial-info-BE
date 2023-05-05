@@ -1,14 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { fetchSymbols } from "../src/util/util";
-
-interface RowData {
-  symbol: string;
-  percentageChanges: number;
-}
-
-interface TemplateView {
-  rows: RowData[];
-}
+import { TemplateView } from "../src/interfaces";
 
 const router: Router = express.Router();
 
