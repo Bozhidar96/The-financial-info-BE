@@ -5,7 +5,7 @@ import router from "../routes/home";
 describe("Home Route", () => {
   it("should handle errors", async () => {
     jest.mock("../src/util", () => ({
-      fetchSymbols: jest.fn(() => {
+      getSymbol: jest.fn(() => {
         throw new Error("Test Error");
       }),
     }));

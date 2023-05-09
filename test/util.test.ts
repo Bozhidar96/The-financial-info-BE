@@ -1,4 +1,4 @@
-import { fetchSymbols } from "../src/util";
+import { getSymbol } from "../src/controllers";
 import { ResponseData } from "../src/interfaces";
 
 describe("fetchSymbols", () => {
@@ -18,7 +18,7 @@ describe("fetchSymbols", () => {
       },
     };
 
-    const responseData: ResponseData[] = await fetchSymbols();
+    const responseData: ResponseData[] = await getSymbol();
 
     expect(responseData).toBeInstanceOf(Array);
     expect(responseData.length).toBeGreaterThan(0);

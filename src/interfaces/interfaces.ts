@@ -12,7 +12,7 @@ export interface ResponseData {
 }
 
 export interface RowData {
-  symbol: string;
+  symbolName: string;
   percentageChanges: number;
 }
 
