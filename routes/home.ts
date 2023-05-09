@@ -1,27 +1,26 @@
 import express, { Request, Response, Router } from "express";
-import { fetchSymbols } from "../src/util";
 import { TemplateView } from "../src/interfaces";
+import { getSymbol } from "../src/controllers";
+import { getSymbolName } from "../src/util";
 
 const router: Router = express.Router();
 
 router.get("/", async function (req: Request, res: Response) {
   try {
-    const response = await fetchSymbols();
-    const data = response.map((response) => {
-      return {
-        symbol: response.data.items[0].basic.symbol,
-        percentageValue:
-          Math.round(
-            (response.data.items[0].quote.change1DayPercent + Number.EPSILON) *
-              100
-          ) / 100,
-      };
+    const response = await getSymbol();
+
+    const data = response.map(({ data }) => {
+      const { basic, quote } = data.items[0];
+      const symbol = basic.symbol;
+      const percentageValue =
+        Math.round((quote.change1DayPercent + Number.EPSILON) * 100) / 100;
+      return { symbol, percentageValue };
     });
 
     const templateView: TemplateView = {
-      rows: data.map((data) => ({
-        symbol: data.symbol,
-        percentageChanges: data.percentageValue,
+      rows: data.map(({ symbol, percentageValue }) => ({
+        percentageChanges: percentageValue,
+        symbolName: getSymbolName(symbol),
       })),
     };
 

@@ -1,10 +1,6 @@
-import { Symbols, URL } from "../constants";
-import { ResponseData } from "../interfaces";
+import { SYMBOLS } from "../constants";
 
-export const fetchSymbols = (): Promise<ResponseData[]> => {
-  return Promise.all(
-    Symbols.map((symbol: string) =>
-      fetch(`${URL}?symbols=${symbol}`).then((responses) => responses.json())
-    )
-  );
+export const getSymbolName = (code: string): string => {
+  const symbol = SYMBOLS.find((symbol) => symbol.code === code);
+  return symbol ? symbol.name : "";
 };

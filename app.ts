@@ -4,7 +4,7 @@ import path from "path";
 import homeRoute from "./routes/home";
 
 const app: Application = express();
-const port: number | string = process.env.PORT || 3000;
+const port: number | string = process.env.PORT || 3002;
 
 app.engine(
   "handlebars",
